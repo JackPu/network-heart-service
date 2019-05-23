@@ -18,7 +18,7 @@ $  npm install network-heart-service -save
 
 ``` es6
 // es6
-import NetworkHeartService from 'daycaca';
+import NetworkHeartService from 'network-heart-service';
 // src specify an image src (url or base64)
 this.nhs = new NetworkHeartService({
   heartMode: 'auto',

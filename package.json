@@ -1,6 +1,6 @@
 {
   "name": "network-heart-service",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A Service to handle netowrk change.",
   "main": "src/index.js",
   "scripts": {
