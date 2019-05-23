@@ -98,7 +98,7 @@ class NetworkHeartService {
     try {
       networkStatus = navigator.connection.effectiveType;
     } catch (e) {
-      logger.log(e);
+      console.error(e);
     }
     if (networkStatus === '2g' || networkStatus === '3g') {
       return this.setLowNetwork();
