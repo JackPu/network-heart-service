@@ -65,19 +65,19 @@ class NetworkHeartService {
 
   setOffline() {
     this.status = STATUS.OFFLINE;
-    this.config.offlineHandle();
+    this.config.offline();
   }
 
   setOnline() {
     this.status = STATUS.ONLINE;
     this.stop();
-    this.config.reConnectHandle();
+    this.config.reconnect();
   }
 
   setLowNetwork() {
     this.status = STATUS.LOW_NETWORK;
     this._heartTime = MIN_HEART_TIME;
-    this.config.lowSpeedNetworkHandle();
+    this.config.lowSpeedNetwork();
     this.lowNetworkCheck ++;
     if (this.lowNetworkCheck > MAX_LOWNETWORK_CHECK_NUM) {
       this.setOnline();
