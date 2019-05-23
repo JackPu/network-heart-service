@@ -6,15 +6,15 @@ const DEFAULT_CONFIG = {
   // 心跳模式，如果为数字，强制多少毫秒进行监测
   heartMode: 'auto',
   // 低网速模式回调
-  lowSpeedNetworkHandle() {
+  lowSpeedNetwork() {
 
   },
   // 网络恢复重连后回调
-  reConnectHandle() {
+  reconnect() {
 
   },
   // 断网回调
-  offlineHandle() {
+  offline() {
 
   },
 };
