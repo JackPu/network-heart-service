@@ -2,9 +2,14 @@
   "name": "network-heart-service",
   "version": "0.1.1",
   "description": "A Service to handle netowrk change.",
-  "main": "src/index.js",
+  "main": "lib/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npm run build-browser && npm run build-umd",
+    "build-browser": "webpack --config ./build/webpack.browser.config.js",
+    "build-umd": "webpack --config ./build/webpack.build.config.js",
+    "dev": "webpack-dev-server --config ./build/webpack.dev.config.js",
+    "test": "karma start ./test/karma.conf.js"
+
   },
   "repository": {
     "type": "git",
@@ -15,5 +20,27 @@
   "bugs": {
     "url": "https://github.com/JackPu/network-heart-service/issues"
   },
-  "homepage": "https://github.com/JackPu/network-heart-service#readme"
+  "homepage": "https://github.com/JackPu/network-heart-service#readme",
+  "devDependencies": {
+    "@babel/preset-env": "^7.0.0-beta.47",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-function-bind": "^6.22.0",
+    "babel-plugin-transform-object-assign": "^6.22.0",
+    "babel-preset-env": "^1.7.0",
+    "chai": "^4.1.2",
+    "eslint": "^4.15.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "jasmine-core": "^2.8.0",
+    "karma": "^2.0.0",
+    "karma-chai": "^0.1.0",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-coverage": "^1.1.1",
+    "karma-jasmine": "^1.1.1",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-webpack": "^2.0.9",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.11.1"
+  }
 }
