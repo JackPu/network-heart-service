@@ -7,6 +7,7 @@ module.exports = {
     path: path.resolve(__dirname, '../dist'),
     filename: 'index.js',
     library: 'NetworkHeartService',
+    libraryExport: 'default',
   },
   module: {
     rules: [
@@ -15,8 +16,7 @@ module.exports = {
         use: [{
           loader: 'babel-loader',
           options: {
-            presets: 'env',
-            plugins: ['transform-object-assign']
+            presets: ['@babel/preset-env'],
           },
         }],
         exclude: /node_modules/,

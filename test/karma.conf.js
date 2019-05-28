@@ -16,19 +16,24 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+        // 'node_modules/@babel/polyfill/lib/index.js',
         //'src/*.js',
         'specs/*.test.js'
     ],
     webpack: {
         module: {
-
-            loaders: [
+            rules: [
                 {
-                    test: /\.js$/,
+                  test: /\.js$/,
+                  use: [{
                     loader: 'babel-loader',
-                    exclude: /(node_modules)/,
+                    options: {
+                      presets: ['@babel/preset-env'],
+                    },
+                  }],
+                  exclude: /node_modules/,
                 },
-            ]
+              ],
         },
         devtool: 'inline-source-map',
     },

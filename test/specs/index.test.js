@@ -1,34 +1,34 @@
 /*eslint-disable*/
-import { expect } from 'chai';
-import daycaca from '../../src/index';
+import { default as chai, expect } from 'chai';
+import spies from 'chai-spies';
+import "@babel/polyfill";
+import NetworkHeartService from '../../src/index';
 
-describe('daycaca tests', () => {
+chai.use(spies);
 
-    it('#_getCanvas()', () => {
-        const canvas = daycaca._getCanvas(100, 100);
-        expect(canvas.tagName).to.equal('CANVAS');
-        expect(canvas.width).to.equal(100);
+describe('NetworkHeartService tests', () => {
+
+    let networkService;
+    const spy = chai.spy();
+    const foo = {
+      reconnect: spy,
+    };
+    beforeEach(() => {
+      jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
+      networkService = new NetworkHeartService(foo);
+    })
+
+    it('#isOnline()', async() => {
+        const isonline = await NetworkHeartService.isOnline();
+        expect(isonline).to.equal(true);
     });
 
-    it('#_createImage()', () => {
-        const i = daycaca._createImage('http://img1.vued.vanthink.cn/vuede7738ce4bcff0e00874b3566ef518783.png');
-        expect(i.tagName).to.equal('IMG');
-    });
-
-    it('#base64()', (done) => {
-        const src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAFElEQVQYV2P8+bbpPwMDAwMjjAEAS2AG0Z9vsksAAAAASUVORK5CYII=';
-        daycaca.base64(src, (data) => {
-            expect(/data:image\/png;base64/.test(data)).to.equal(true)
-            done();
-        });
-    });
-
-    it('#resize()', () => {
-        const src = 'http://img1.vued.vanthink.cn/vuede7738ce4bcff0e00874b3566ef518783.png';
-        daycaca.base64(src, 2, (data) => {
-            expect(/data:image\/png;base64/.test(data)).to.equal(true)
-            done();
-        });
+    it('#_check()', (done) => {
+      networkService.start();
+      setTimeout(() => {
+        expect(spy).to.have.been.called();
+        done();
+      }, 8000)
     });
 
 });
