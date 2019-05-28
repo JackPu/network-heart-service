@@ -31,8 +31,8 @@ this.networkHeartService.start();
 ### config
 
 + `heartMode` { number } 2000
-  if it is undefined , it means use `auto` mode. It will check the network in an incerasing timeout.
-  But is is set with a number, it will check the network in speciy time.
+    if it is undefined , it means use `auto` mode. It will check the network in an increasing timeout.
+    But it is set with a number, it will check the network in specify time.
 
 + `lowSpeedNetwork` { function }
 
