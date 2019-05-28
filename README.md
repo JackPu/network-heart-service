@@ -1,6 +1,6 @@
 # Network heart service
 
-[![CircleCI](https://circleci.com/gh/JackPu/daycaca.svg?style=shield)](https://circleci.com/gh/JackPu/daycaca)
+[![CircleCI](https://circleci.com/gh/JackPu/network-heart-service.svg?style=shield)](https://circleci.com/gh/JackPu/network-heart-service)
 [![npm](https://img.shields.io/npm/v/network-heart-service.svg?maxAge=2592000)]()
 
 
