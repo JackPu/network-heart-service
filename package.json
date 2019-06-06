@@ -1,7 +1,7 @@
 {
   "name": "network-heart-service",
   "version": "0.1.2",
-  "description": "A Service to handle netowrk change.",
+  "description": "A Service to handle network change.",
   "main": "lib/index.js",
   "scripts": {
     "build": "npm run build-browser && npm run build-node",
