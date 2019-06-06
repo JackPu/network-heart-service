@@ -5,6 +5,8 @@
 const DEFAULT_CONFIG = {
   // 心跳模式，如果为数字，强制多少毫秒进行监测
   heartMode: 'auto',
+  // ping url
+  pingUrl: 'https://ipv4.icanhazip.com',
   // 低网速模式回调
   lowSpeedNetwork() {
 
@@ -18,8 +20,6 @@ const DEFAULT_CONFIG = {
 
   },
 };
-
-const pingUrl = 'https://ipv4.icanhazip.com';
 
 const MIN_HEART_TIME = 5000;
 const MAX_HEART_TIME = 30000;
@@ -35,25 +35,25 @@ const STATUS = {
 };
 
 class NetworkHeartService {
-  static isOnline() {
-    let status = true;
-    if (typeof navigator.onLine === 'undefined') {
-      status = navigator.onLine;
-      return Promise.resolve(status);
-    }
-    const _fetch = fetch(pingUrl);
-    return Promise.all([_fetch, _fetch]).then(() => Promise.resolve(true)).catch((err) => {
-      if (err.message.indexOf('Failed to fetch') !== -1) {
-        return Promise.resolve(false);
-      }
-    });
-  }
-
   constructor(config) {
     this.config = Object.assign(DEFAULT_CONFIG, config);
     this.status = STATUS.UNKNOWN;
     this._heartTime = MIN_HEART_TIME;
     this.lowNetworkCheck = 0;
+  }
+
+  isOnline() {
+    let status = true;
+    if (typeof navigator.onLine === 'undefined') {
+      status = navigator.onLine;
+      return Promise.resolve(status);
+    }
+    const _fetch = fetch(this.config.pingUrl);
+    return Promise.all([_fetch, _fetch]).then(() => Promise.resolve(true)).catch((err) => {
+      if (err.message.indexOf('Failed to fetch') !== -1) {
+        return Promise.resolve(false);
+      }
+    });
   }
 
   start() {
@@ -129,7 +129,7 @@ class NetworkHeartService {
   _ping() {
     const size = 400;
     const _t1 = Date.now();
-    fetch(`${pingUrl}?_t=${Date.now()}`).then((result) => {
+    fetch(`${this.config.pingUrl}?_t=${Date.now()}`).then((result) => {
       // console.log(result);
       const _t2 = Date.now();
       if (result.status === 200) {

@@ -16,11 +16,11 @@ describe('NetworkHeartService tests', () => {
     beforeEach(() => {
       jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
       networkService = new NetworkHeartService(foo);
-    })
+    });
 
     it('#isOnline()', async() => {
-        const isonline = await NetworkHeartService.isOnline();
-        expect(isonline).to.equal(true);
+        const networkService = new NetworkHeartService();
+        expect(await networkService.isOnline()).to.equal(true);
     });
 
     it('#_check()', (done) => {

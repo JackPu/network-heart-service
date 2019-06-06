@@ -33,6 +33,8 @@ this.networkHeartService.start();
 + `heartMode` { number } 2000
     if it is undefined , it means use `auto` mode. It will check the network in an increasing timeout.
     But it is set with a number, it will check the network in specify time.
++ `pingUrl` { string }
+    Detection target. default: `https://ipv4.icanhazip.com`
 
 + `lowSpeedNetwork` { function }
 
@@ -53,7 +55,8 @@ this.networkHeartService.start();
 Check if your network could work.
 
 ``` js
-const isOnline = await NetworkHeartService.isOnline();
+const networkHeartService = new NetworkHeartService();
+const isOnline = await networkHeartService.isOnline();
 ```
 
 ### `start()` and `stop()`
@@ -63,6 +66,7 @@ Start or Stop the network check service.
 ``` js
 this.networkHeartService = new NetworkHeartService({
   heartMode: 'auto',
+  pingUrl: 'https://www.google.com',
   reconnect() {
     console.log('TODO ...')
   }
