@@ -27,8 +27,6 @@ const STEP_TIME = 1000;
 const MIN_NETWORK_SPEED = 43700;
 const MAX_LOWNETWORK_CHECK_NUM = 3;
 
-
-
 const STATUS = {
   UNKNOWN: 'unknown',
   ONLINE: 'online',
@@ -37,22 +35,18 @@ const STATUS = {
 };
 
 class NetworkHeartService {
-
   static isOnline() {
     let status = true;
-    if (typeof navigator.onLine == 'undefined') {
+    if (typeof navigator.onLine === 'undefined') {
       status = navigator.onLine;
       return Promise.resolve(status);
-    } else {
-      const _fetch = fetch(pingUrl);
-      return Promise.all([_fetch, _fetch]).then(() => {
-        return Promise.resolve(true);
-      }).catch((err) => {
-        if (err.message.indexOf('Failed to fetch') !== -1) {
-          return Promise.resolve(false);
-        }
-      });
     }
+    const _fetch = fetch(pingUrl);
+    return Promise.all([_fetch, _fetch]).then(() => Promise.resolve(true)).catch((err) => {
+      if (err.message.indexOf('Failed to fetch') !== -1) {
+        return Promise.resolve(false);
+      }
+    });
   }
 
   constructor(config) {
@@ -76,7 +70,7 @@ class NetworkHeartService {
     this._timeoutID = setTimeout(() => {
       this._ping();
       this.start();
-    }, this._heartTime)
+    }, this._heartTime);
   }
 
   stop() {
@@ -99,7 +93,7 @@ class NetworkHeartService {
     this.status = STATUS.LOW_NETWORK;
     this._heartTime = MIN_HEART_TIME;
     this.config.lowSpeedNetwork();
-    this.lowNetworkCheck ++;
+    this.lowNetworkCheck += 1;
     if (this.lowNetworkCheck > MAX_LOWNETWORK_CHECK_NUM) {
       this.setOnline();
       this.lowNetworkCheck = 0;
@@ -135,10 +129,10 @@ class NetworkHeartService {
   _ping() {
     const size = 400;
     const _t1 = Date.now();
-    fetch(`${pingUrl}?_t=` + parseInt(Math.random() * 10000)).then((result) => {
+    fetch(`${pingUrl}?_t=${Date.now()}`).then((result) => {
       // console.log(result);
       const _t2 = Date.now();
-      if (result.status == 200) {
+      if (result.status === 200) {
         const bw = this._getBandWidth(size, (_t2 - _t1) / 1000);
         this._setNetworkType(bw);
       }
@@ -147,7 +141,7 @@ class NetworkHeartService {
       if (err.message.indexOf('Failed to fetch') !== -1 && this.status !== STATUS.OFFLINE) {
         this.setOffline();
       }
-    })
+    });
   }
 }
 
