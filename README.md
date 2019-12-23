@@ -12,7 +12,7 @@ A Service to check and handle network change.
 ### Npm
 
 ``` bash
-$  npm install network-heart-service -save
+$  npm install network-heart-service --save
 ```
 
 
